@@ -13,8 +13,7 @@ import java.util.Optional;
 
 @RestController
 public class ArticuloController {
-    @Autowired
-    private ArticuloRepository articuloRepository;
+
     @Autowired
     private ArticuloService articuloService;
 

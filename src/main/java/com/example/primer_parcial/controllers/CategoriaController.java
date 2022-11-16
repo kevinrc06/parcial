@@ -17,8 +17,7 @@ import java.util.List;
 
 @RestController
 public class CategoriaController {
-    @Autowired
-    private CategoriaRepository categoriaRepository;
+
     @Autowired
     private CategoriaService categoriaService;
 
