@@ -12,7 +12,10 @@ public class PrimerParcialApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PrimerParcialApplication.class, args);
 	}
-
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
 
 
 }
