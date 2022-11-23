@@ -2,7 +2,6 @@ package com.example.primer_parcial.Service;
 
 import com.example.primer_parcial.models.Usuario;
 import com.example.primer_parcial.repository.UsuarioRepository;
-import com.example.primer_parcial.services.UsuarioService;
 import com.example.primer_parcial.services.UsuarioServicelmpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,8 @@ import org.mockito.Mock;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -59,6 +60,24 @@ public class UsuarioServicioText {
 
     }
     @Test
+    void whenNoEncuentraUnUsuarioPorId(){
+        Usuario usuario = null;
+
+
+        //given
+
+
+
+
+        //when
+        when(usuarioRepository.findById(anyLong())).thenReturn(Optional.ofNullable(usuario));
+
+        //then
+        Usuario usuarioOptional = usuarioServicelmpl.getUserById(anyLong()).getBody();
+        Assertions.assertEquals(null, usuarioOptional);
+
+    }
+    @Test
     void seDebeEncontrarUnUsuarioPorNombre(){
         // given
         Usuario usuario = new Usuario();
@@ -90,6 +109,7 @@ public class UsuarioServicioText {
 
     }
 
+
     @Test
     void seDebeEncontrarUnUsuarioPorApellido(){
         // given
@@ -108,7 +128,7 @@ public class UsuarioServicioText {
 
 
         // when
-        when(usuarioRepository.findAllByApellidos("rivera")).thenReturn(List.of(usuario));
+        when(usuarioRepository.findAllByApellidos("rivera")).thenReturn(List.of((usuario)));
         //when(usuarioRepository.findAllByNombre("kevin")).thenReturn(List.of(usuario));
         //when(usuarioRepository.findById(anyLong())).thenReturn(Optional.of(usuario));
 
@@ -122,6 +142,7 @@ public class UsuarioServicioText {
 
 
     }
+
     @Test
     void seDebeEncontrarUnUsuarioPorNombreYApellido(){
         // given
@@ -154,5 +175,6 @@ public class UsuarioServicioText {
 
 
     }
+
 
 }
