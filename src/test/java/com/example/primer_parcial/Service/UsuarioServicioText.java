@@ -76,16 +76,81 @@ public class UsuarioServicioText {
 
 
         // when
-        when(usuarioRepository.findAllByNombre(anyString()));
+        when(usuarioRepository.findAllByNombre("kevin")).thenReturn(List.of(usuario));
         //when(usuarioRepository.findById(anyLong())).thenReturn(Optional.of(usuario));
 
 
-        //ResponseEntity<Usuario> usuarioRespuesta = usuarioServicelmpl.getUserById(anyLong());
+        ResponseEntity<List<Usuario>> usuarioRespuesta = usuarioServicelmpl.allUsersByName("kevin");
         // ResponseEntity<List<Usuario>> usuarios = usuarioServicelmpl.allUsersByName(anyString());
 
         // then
 
-        //Assertions.assertNotNull(usuarios);
+        Assertions.assertNotNull(usuarioRespuesta);
+
+
+    }
+
+    @Test
+    void seDebeEncontrarUnUsuarioPorApellido(){
+        // given
+        Usuario usuario = new Usuario();
+        usuario.setId(1l);
+        usuario.setNombre("kevin");
+        usuario.setApellidos("rivera");
+        usuario.setDocumento("1003259419");
+        usuario.setDireccion("calle 2");
+        usuario.setFechaNacimiento(new Date(2000-02-10));
+        usuario.setCorreo("kevin@gmail");
+        usuario.setPassword("kevin123");
+
+
+
+
+
+        // when
+        when(usuarioRepository.findAllByApellidos("rivera")).thenReturn(List.of(usuario));
+        //when(usuarioRepository.findAllByNombre("kevin")).thenReturn(List.of(usuario));
+        //when(usuarioRepository.findById(anyLong())).thenReturn(Optional.of(usuario));
+
+        ResponseEntity<List<Usuario>> usuarioRespuesta = usuarioServicelmpl.allUsersByLastName("rivera");
+        //ResponseEntity<List<Usuario>> usuarioRespuesta = usuarioServicelmpl.allUsersByName("kevin");
+        // ResponseEntity<List<Usuario>> usuarios = usuarioServicelmpl.allUsersByName(anyString());
+
+        // then
+
+        Assertions.assertNotNull(usuarioRespuesta);
+
+
+    }
+    @Test
+    void seDebeEncontrarUnUsuarioPorNombreYApellido(){
+        // given
+        Usuario usuario = new Usuario();
+        usuario.setId(1l);
+        usuario.setNombre("kevin");
+        usuario.setApellidos("rivera");
+        usuario.setDocumento("1003259419");
+        usuario.setDireccion("calle 2");
+        usuario.setFechaNacimiento(new Date(2000-02-10));
+        usuario.setCorreo("kevin@gmail");
+        usuario.setPassword("kevin123");
+
+
+
+
+
+        // when
+        when(usuarioRepository.findAllByNombreAndApellidos("kevin","rivera")).thenReturn(List.of(usuario));
+        //when(usuarioRepository.findAllByNombre("kevin")).thenReturn(List.of(usuario));
+        //when(usuarioRepository.findById(anyLong())).thenReturn(Optional.of(usuario));
+
+        ResponseEntity<List<Usuario>> usuarioRespuesta = usuarioServicelmpl.allUsersByNameAndLastName("kevin","rivera");
+        //ResponseEntity<List<Usuario>> usuarioRespuesta = usuarioServicelmpl.allUsersByName("kevin");
+        // ResponseEntity<List<Usuario>> usuarios = usuarioServicelmpl.allUsersByName(anyString());
+
+        // then
+
+        Assertions.assertNotNull(usuarioRespuesta);
 
 
     }
