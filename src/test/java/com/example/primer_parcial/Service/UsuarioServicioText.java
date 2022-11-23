@@ -213,6 +213,24 @@ public class UsuarioServicioText {
 
 
     }
+    @Test
+    void whenNoEncuentraUnUsuarioPorNombreYapellido(){
+        Usuario usuario = null;
+
+
+        //given
+
+
+
+
+        //when
+        when(usuarioRepository.findAllByNombreAndApellidos(anyString(),anyString())).thenReturn(Collections.emptyList());
+
+        //then
+        List<Usuario> usuarioOptional = usuarioServicelmpl.allUsersByNameAndLastName(anyString(),anyString()).getBody();
+        Assertions.assertEquals(null, usuarioOptional);
+
+    }
 
 
 }
