@@ -162,6 +162,26 @@ public class UsuarioServicioText {
     }
 
     @Test
+    void whenNoEncuentraUnUsuarioPorApellido(){
+        Usuario usuario = null;
+
+
+        //given
+
+
+
+
+        //when
+        when(usuarioRepository.findAllByApellidos(anyString())).thenReturn(Collections.emptyList());
+
+        //then
+        List<Usuario> usuarioOptional = usuarioServicelmpl.allUsersByLastName(anyString()).getBody();
+        Assertions.assertEquals(null, usuarioOptional);
+
+    }
+
+
+    @Test
     void seDebeEncontrarUnUsuarioPorNombreYApellido(){
         // given
         Usuario usuario = new Usuario();
