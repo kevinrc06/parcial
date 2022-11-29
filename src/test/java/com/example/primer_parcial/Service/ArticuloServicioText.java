@@ -34,24 +34,24 @@ public class ArticuloServicioText {
     ArticuloRepository articuloRepository;
     @Mock
     CategoriaRepository categoriaRepository;
-   /*
+
     @Test
     void seDebeEncontrarUnArticuloPorCodigo(){
         // given
         Articulo articulo= new Articulo();
         Categoria categoria= new Categoria();
+        categoria.setId(2l);
+        categoria.setNombre("peppe");
+        categoria.setDescripcion("jjj");
         articulo.setId(1l);
         articulo.setCodigo("100");
         articulo.setNombre("kevin");
         articulo.setDescripcion("prubea");
         articulo.setFecha_registro(new Date(2000-02-10));
         articulo.setStock(10);
-        articulo.setCategoria(categoria.setId(2l), categoria.setNombre("peppe"), categoria.setDescripcion("jjj"));
+        articulo.setCategoria(categoria);
         articulo.setPrecio_compra(new Float(20.000));
         articulo.setPrecio_venta(new Float(20.000));
-
-
-
 
 
 
@@ -61,12 +61,32 @@ public class ArticuloServicioText {
 
         ResponseEntity<Articulo> articuloRespuesta = articuloServicelmpl.getArticuloByCodigo(anyString());
 
-
         // then
-
         Assertions.assertNotNull(articuloRespuesta);
 
 
     }
-    */
+
+    @Test
+    void whenNoEncuentraUnArticuloPorCodigo(){
+         Articulo articulo = null;
+
+
+        //given
+
+
+
+
+        //when
+
+        when(articuloRepository.findByCodigo(anyString())).thenReturn(Optional.ofNullable(articulo));
+
+        //then
+        //Usuario usuarioOptional = usuarioServicelmpl.getUserById(anyLong()).getBody();
+        Articulo articuloOptional = articuloServicelmpl.getArticuloByCodigo(anyString()).getBody();
+
+        Assertions.assertEquals(null, articuloOptional);
+
+
+    }
 }
