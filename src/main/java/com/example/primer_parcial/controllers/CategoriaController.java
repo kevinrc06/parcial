@@ -47,4 +47,25 @@ public class CategoriaController {
 
     }
 
+    @GetMapping(value = "/categoria/{id}")
+    public ResponseEntity getCategoria(@PathVariable Long id, @RequestHeader(value = "Authorization") String token ) {
+        try{
+            if(jwtUtil.getKey(token) == null){
+                return categoriaService.getCategoriaById(id);
+
+            }return ResponseEntity.badRequest().build();
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+        }
+
+    }
+    @GetMapping("/categoria/nombre/{nombre}")
+    public ResponseEntity listaPorNombre(@PathVariable String nombre,@RequestHeader(value = "Authorization") String token ) {
+        if(jwtUtil.getKey(token) == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+        }
+        return categoriaService.allCategoriasByName(nombre);
+
+    }
+
 }

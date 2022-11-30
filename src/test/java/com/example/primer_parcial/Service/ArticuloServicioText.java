@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +37,61 @@ public class ArticuloServicioText {
     CategoriaRepository categoriaRepository;
 
     @Test
+    void seDebeEncontrarUnArticuloPorId(){
+        // given
+        Articulo articulo= new Articulo();
+        Categoria categoria= new Categoria();
+        categoria.setId(2l);
+        categoria.setNombre("peppe");
+        categoria.setDescripcion("jjj");
+        articulo.setId(1l);
+        articulo.setCodigo("100");
+        articulo.setNombre("kevin");
+        articulo.setDescripcion("prubea");
+        articulo.setFecha_registro(new Date(2000-02-10));
+        articulo.setStock(10);
+        articulo.setCategoria(categoria);
+        articulo.setPrecio_compra(new Float(20.000));
+        articulo.setPrecio_venta(new Float(20.000));
+
+
+
+
+
+        // when
+        when(articuloRepository.findById(anyLong())).thenReturn(Optional.of(articulo));
+
+
+        ResponseEntity<Articulo> articuloRespuesta = articuloServicelmpl.getArticuloById(anyLong());
+        // then
+
+        Assertions.assertNotNull(articuloRespuesta);
+
+
+    }
+    @Test
+    void whenNoEncuentraUnArticuloPorId(){
+
+        Articulo articulo = null;
+
+
+        //given
+
+
+
+
+        //when
+
+        when(articuloRepository.findById(anyLong())).thenReturn(Optional.ofNullable(articulo));
+
+        //then
+
+        Articulo articuloOptional = articuloServicelmpl.getArticuloById(anyLong()).getBody();
+        Assertions.assertEquals(null, articuloOptional);
+
+    }
+
+     @Test
     void seDebeEncontrarUnArticuloPorCodigo(){
         // given
         Articulo articulo= new Articulo();
@@ -89,4 +145,65 @@ public class ArticuloServicioText {
 
 
     }
+
+    @Test
+    void seDebeEncontrarUnArticuloPorNombre(){
+        // given
+        Articulo articulo= new Articulo();
+        Categoria categoria= new Categoria();
+        categoria.setId(2l);
+        categoria.setNombre("peppe");
+        categoria.setDescripcion("jjj");
+        articulo.setId(1l);
+        articulo.setCodigo("100");
+        articulo.setNombre("kevin");
+        articulo.setDescripcion("prubea");
+        articulo.setFecha_registro(new Date(2000-02-10));
+        articulo.setStock(10);
+        articulo.setCategoria(categoria);
+        articulo.setPrecio_compra(new Float(20.000));
+        articulo.setPrecio_venta(new Float(20.000));
+
+
+
+
+
+        // when
+
+        when(articuloRepository.findAllByNombre("kevin")).thenReturn(List.of(articulo));
+
+
+
+        ResponseEntity<List<Articulo>> articuloRespuesta = articuloServicelmpl.allArticulosByName("kevin");
+
+
+        // then
+
+        Assertions.assertNotNull(articuloRespuesta);
+
+
+    }
+
+    @Test
+    void whenNoEncuentraUnArticuloPorNombre(){
+
+        Articulo articulo = null;
+
+
+        //given
+
+
+
+
+        //when
+
+        when(articuloRepository.findAllByNombre(anyString())).thenReturn(Collections.emptyList());
+
+        //then
+
+        List<Articulo> articuloOptional = articuloServicelmpl.allArticulosByName(anyString()).getBody();
+        Assertions.assertEquals(null, articuloOptional);
+
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.primer_parcial.services;
 
 import com.example.primer_parcial.models.Articulo;
+import com.example.primer_parcial.models.Usuario;
 import com.example.primer_parcial.repository.ArticuloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,6 +81,25 @@ public class ArticuloServicelmpl implements ArticuloService {
     @Override
     public ResponseEntity<List<Articulo>> allArticulos() {
         List<Articulo> articulos= articuloRepository.findAll();
+        if(articulos.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity(articulos,HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Articulo> getArticuloById(Long id) {
+        Optional<Articulo> articulo= articuloRepository.findById(id);
+        if (articulo.isPresent()){
+            return new ResponseEntity(articulo, HttpStatus.OK);
+        }
+        return  ResponseEntity.notFound().build();
+    }
+
+    @Override
+    public ResponseEntity<List<Articulo>> allArticulosByName(String nombre) {
+
+        List<Articulo> articulos= articuloRepository.findAllByNombre(nombre);
         if(articulos.isEmpty()){
             return ResponseEntity.notFound().build();
         }

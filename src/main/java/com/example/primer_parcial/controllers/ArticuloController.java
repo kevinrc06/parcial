@@ -32,6 +32,25 @@ public class ArticuloController {
         }
 
     }
+    @GetMapping(value = "/articulo/{id}")
+    public ResponseEntity getArticulo(@PathVariable Long id, @RequestHeader(value = "Authorization") String token ) {
+        try{
+            if(jwtUtil.getKey(token) == null){
+                return articuloService.getArticuloById(id);
+            }return ResponseEntity.badRequest().build();
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+        }
+
+    }
+    @GetMapping("/articulo/nombre/{nombre}")
+    public ResponseEntity listaPorNombre(@PathVariable String nombre,@RequestHeader(value = "Authorization") String token ) {
+        if(jwtUtil.getKey(token) == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+        }
+
+        return articuloService.allArticulosByName(nombre);
+    }
     @GetMapping("/articulo/{codigo}")
     public ResponseEntity listaPorCodigo(@PathVariable String codigo,@RequestHeader(value = "Authorization") String token){
         try {
