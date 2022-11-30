@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -230,6 +231,84 @@ public class UsuarioServicioText {
         List<Usuario> usuarioOptional = usuarioServicelmpl.allUsersByNameAndLastName(anyString(),anyString()).getBody();
         Assertions.assertEquals(null, usuarioOptional);
 
+    }
+
+    @Test
+    void seDebeListarLosUsuarios() {
+        //Given
+        Usuario usuario = new Usuario();
+        usuario.setId(1l);
+        usuario.setNombre("kevin");
+        usuario.setApellidos("rivera");
+        usuario.setDocumento("1003259419");
+        usuario.setDireccion("calle 2");
+        usuario.setFechaNacimiento(new Date(2000-02-10));
+        usuario.setCorreo("kevin@gmail");
+        usuario.setPassword("kevin123");
+
+        //when
+
+        when(usuarioRepository.findAll()).thenReturn(List.of(usuario));
+
+
+
+
+        ResponseEntity<List<Usuario>> usuarioP= usuarioServicelmpl.allUsers();
+
+        //then
+        Assertions.assertNotNull(usuarioP);
+    }
+
+    @Test
+    void whenNoEncuentraNingunUsuario() {
+        Usuario usuario = null;
+
+        //When
+        when(usuarioRepository.findAll()).thenReturn(Collections.emptyList());
+
+        List<Usuario> usuarioP = usuarioServicelmpl.allUsers().getBody();
+
+
+        //Then
+        Assertions.assertEquals(null, usuarioP);
+
+    }
+
+    @Test
+    void seDebeActualizarUnUsuario() {
+        // Given
+        Usuario usuario = new Usuario();
+        usuario.setId(1l);
+        usuario.setNombre("kevin");
+        usuario.setApellidos("rivera");
+        usuario.setDocumento("1003259419");
+        usuario.setDireccion("calle 2");
+        usuario.setFechaNacimiento(new Date(2000-02-10));
+        usuario.setCorreo("kevin@gmail");
+        usuario.setPassword("kevin123");
+
+        Usuario usuarioActualizado = new Usuario();
+
+        usuarioActualizado.setId(1l);
+        usuarioActualizado.setNombre("julian");
+        usuarioActualizado.setApellidos("contreras");
+        usuarioActualizado.setDocumento("1003259419");
+        usuarioActualizado.setDireccion("calle 3");
+        usuarioActualizado.setFechaNacimiento(new Date(2001-02-10));
+        usuarioActualizado.setCorreo("kevin2@gmail");
+        usuarioActualizado.setPassword("kevin1234");
+
+        given(usuarioRepository.findById(usuario.getId())).willReturn(Optional.of(usuario));
+
+
+        given(usuarioRepository.save(usuarioActualizado)).willReturn(usuarioActualizado);
+
+
+
+        ResponseEntity<Usuario> userSave = usuarioServicelmpl.editUser(usuario.getId(), usuarioActualizado);
+
+        //Then
+        Assertions.assertNotNull(userSave);
     }
 
 

@@ -206,4 +206,54 @@ public class ArticuloServicioText {
 
     }
 
+    @Test
+    void seDebeListarLosArticulos() {
+        //Given
+        Articulo articulo= new Articulo();
+        Categoria categoria= new Categoria();
+        categoria.setId(2l);
+        categoria.setNombre("peppe");
+        categoria.setDescripcion("jjj");
+        articulo.setId(1l);
+        articulo.setCodigo("100");
+        articulo.setNombre("kevin");
+        articulo.setDescripcion("prubea");
+        articulo.setFecha_registro(new Date(2000-02-10));
+        articulo.setStock(10);
+        articulo.setCategoria(categoria);
+        articulo.setPrecio_compra(new Float(20.000));
+        articulo.setPrecio_venta(new Float(20.000));
+
+        //when
+        when(articuloRepository.findAll()).thenReturn(List.of(articulo));
+
+
+
+
+
+
+        ResponseEntity<List<Articulo>> articuloP = articuloServicelmpl.allArticulos();
+
+        //then
+        Assertions.assertNotNull(articuloP);
+    }
+
+    @Test
+    void whenNoEncuentraNingunArticulo() {
+
+        Articulo articulo = null;
+
+        //When
+
+        when(articuloRepository.findAll()).thenReturn(Collections.emptyList());
+
+
+        List<Articulo> articuloP = articuloServicelmpl.allArticulos().getBody();
+
+
+        //Then
+        Assertions.assertEquals(null, articuloP);
+
+    }
+
 }

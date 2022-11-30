@@ -137,4 +137,51 @@ public class CategoriaServicioText {
         Assertions.assertEquals(null, categoriaOptional);
 
     }
+
+    @Test
+    void seDebeListarLasCategorias() {
+        //Given
+
+        Categoria categoria= new Categoria();
+        categoria.setId(2l);
+        categoria.setNombre("peppe");
+        categoria.setDescripcion("jjj");
+
+
+        //when
+
+        when(categoriaRepository.findAll()).thenReturn(List.of(categoria));
+
+
+
+
+
+
+
+        ResponseEntity<List<Categoria>> categoriaP = categoriaServicelmpl.allCategorias();
+
+        //then
+        Assertions.assertNotNull(categoriaP);
+    }
+
+    @Test
+    void whenNoEncuentraNingunaCategoria() {
+
+
+        Categoria categoria = null;
+
+        //When
+
+
+        when(categoriaRepository.findAll()).thenReturn(Collections.emptyList());
+
+
+
+        List<Categoria> categoriaP = categoriaServicelmpl.allCategorias().getBody();
+
+
+        //Then
+        Assertions.assertEquals(null, categoriaP);
+
+    }
 }
