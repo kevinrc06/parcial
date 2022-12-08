@@ -47,6 +47,7 @@ public class ArticuloServicelmpl implements ArticuloService {
                 articuloBD.get().setFecha_registro(articulo.getFecha_registro());
                 articuloBD.get().setStock(articulo.getStock());
                 articuloBD.get().setCategoria(articulo.getCategoria());
+                articuloBD.get().setUsuario(articulo.getUsuario());
                 articuloBD.get().setPrecio_venta(articulo.getPrecio_venta());
                 articuloBD.get().setPrecio_compra(articulo.getPrecio_compra());
 

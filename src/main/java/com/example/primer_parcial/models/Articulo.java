@@ -24,6 +24,8 @@ public class Articulo {
     private Number stock;
     @ManyToOne
     private Categoria categoria;
+    @ManyToOne
+    private Usuario usuario;
     @Column(nullable = false)
     private Float precio_venta;
     @Column(nullable = false)
