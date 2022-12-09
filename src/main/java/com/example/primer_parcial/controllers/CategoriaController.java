@@ -23,40 +23,35 @@ public class CategoriaController {
 
     @PostMapping("/categoria")
     public ResponseEntity crearCategoria(@RequestBody Categoria categoria, @RequestHeader(value = "Authorization") String token){
-        try {
-            if(jwtUtil.getKey(token) == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+        try{
+            if(jwtUtil.getKey(token) != null) {
+                return categoriaService.createCategoria(categoria);
             }
-            return categoriaService.createCategoria(categoria);
+            return ResponseEntity.badRequest().build();
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token no valido");
         }
-
 
     }
     @GetMapping("/categorias")
     public ResponseEntity listarCategoria( @RequestHeader(value = "Authorization") String token) {
-        try {
-            if(jwtUtil.getKey(token) == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+        try{
+            if(jwtUtil.getKey(token) != null) {
+                return categoriaService.allCategorias();
             }
-            return categoriaService.allCategorias();
+            return ResponseEntity.badRequest().build();
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token no valido");
         }
 
     }
 
     @GetMapping(value = "/categoria/{id}")
     public ResponseEntity getCategoria(@PathVariable Long id, @RequestHeader(value = "Authorization") String token ) {
-        try{
-            if(jwtUtil.getKey(token) == null){
-                return categoriaService.getCategoriaById(id);
-
-            }return ResponseEntity.badRequest().build();
-        }catch(Exception e){
+        if(jwtUtil.getKey(token) == null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
         }
+        return categoriaService.getCategoriaById(id);
 
     }
     @GetMapping("/categoria/nombre/{nombre}")

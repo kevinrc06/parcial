@@ -24,13 +24,10 @@ public class UsuarioController {
 
     @GetMapping(value = "/usuario/{id}")
     public ResponseEntity getUsuario(@PathVariable Long id, @RequestHeader(value = "Authorization") String token ) {
-        try{
-            if(jwtUtil.getKey(token) == null){
-                return usuarioService.getUserById(id);
-            }return ResponseEntity.badRequest().build();
-        }catch(Exception e){
+        if(jwtUtil.getKey(token) == null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
         }
+        return usuarioService.getUserById(id);
 
     }
 
