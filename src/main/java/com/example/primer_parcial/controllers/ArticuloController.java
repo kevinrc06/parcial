@@ -51,7 +51,7 @@ public class ArticuloController {
 
         return articuloService.allArticulosByName(nombre);
     }
-    @GetMapping("/articulo/{codigo}")
+    @GetMapping("/articulo/codigo/{codigo}")
     public ResponseEntity listaPorCodigo(@PathVariable String codigo,@RequestHeader(value = "Authorization") String token){
         try {
             if(jwtUtil.getKey(token) == null) {
@@ -64,7 +64,7 @@ public class ArticuloController {
 
     }
 
-    @PutMapping("/articulo/{codigo}")
+    @PutMapping("/articulo/codigo/{codigo}")
     public ResponseEntity modificarArticulo(@PathVariable String codigo, @RequestBody Articulo articulo,@RequestHeader(value = "Authorization") String token) {
         try {
             if(jwtUtil.getKey(token) == null) {
