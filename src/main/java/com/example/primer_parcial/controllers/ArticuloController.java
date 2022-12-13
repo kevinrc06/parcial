@@ -64,7 +64,7 @@ public class ArticuloController {
 
     }
 
-    @PutMapping("/articulo/codigo/{codigo}")
+    @PutMapping("/articulo/{codigo}")
     public ResponseEntity modificarArticulo(@PathVariable String codigo, @RequestBody Articulo articulo,@RequestHeader(value = "Authorization") String token) {
         try {
             if(jwtUtil.getKey(token) == null) {

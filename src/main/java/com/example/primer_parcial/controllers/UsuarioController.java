@@ -64,6 +64,14 @@ public class UsuarioController {
         }
         return usuarioService.allUsersByName(nombre);
     }
+    @GetMapping("/usuario/correo/{correo}")
+    public ResponseEntity listaPorCorreo(@PathVariable String correo,@RequestHeader(value = "Authorization") String token ) {
+        if(jwtUtil.getKey(token) == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
+        }
+        return usuarioService.getUserByCorreo(correo);
+    }
+
 
     @GetMapping("/usuario/apellidos/{apellidos}")
     public ResponseEntity listaPorApellidos(@PathVariable String apellidos,@RequestHeader(value = "Authorization") String token ) {

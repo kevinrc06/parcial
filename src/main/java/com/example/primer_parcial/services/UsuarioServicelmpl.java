@@ -134,4 +134,13 @@ public class UsuarioServicelmpl implements UsuarioService{
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Override
+    public ResponseEntity getUserByCorreo(String correo) {
+        Usuario usuario = usuarioRepository.findByCorreo(correo);
+        if(usuario!= null){
+            return new ResponseEntity(usuario, HttpStatus.OK);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
