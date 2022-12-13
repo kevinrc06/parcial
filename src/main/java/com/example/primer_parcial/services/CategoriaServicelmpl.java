@@ -39,8 +39,8 @@ public class CategoriaServicelmpl implements CategoriaService {
     }
 
     @Override
-    public ResponseEntity<Categoria> getCategoriaById(Long id) {
-        Optional<Categoria> categoria= categoriaRepository.findById(id);
+    public ResponseEntity<Categoria> getCategoriaById(Long id_categoria) {
+        Optional<Categoria> categoria= categoriaRepository.findById(id_categoria);
 
         if (categoria.isPresent()){
             return new ResponseEntity(categoria, HttpStatus.OK);

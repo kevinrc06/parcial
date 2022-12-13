@@ -51,12 +51,12 @@ public class CategoriaController {
 
     }
 
-    @GetMapping(value = "/categoria/{id}")
-    public ResponseEntity getCategoria(@PathVariable Long id, @RequestHeader(value = "Authorization") String token ) {
+    @GetMapping(value = "/categoria/{id_categoria}")
+    public ResponseEntity getCategoria(@PathVariable Long id_categoria, @RequestHeader(value = "Authorization") String token ) {
         if(jwtUtil.getKey(token) == null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("token no valido");
         }
-        return categoriaService.getCategoriaById(id);
+        return categoriaService.getCategoriaById(id_categoria);
 
     }
     @GetMapping("/categoria/nombre/{nombre}")

@@ -9,7 +9,7 @@ public interface CategoriaService {
 
     ResponseEntity<List<Categoria>> allCategorias();
 
-    ResponseEntity<Categoria> getCategoriaById(Long id);
+    ResponseEntity<Categoria> getCategoriaById(Long id_categoria);
 
     ResponseEntity<List<Categoria>> allCategoriasByName(String nombre);
 }
