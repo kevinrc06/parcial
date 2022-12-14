@@ -2,12 +2,9 @@ package com.example.primer_parcial.Service;
 
 import com.example.primer_parcial.models.Articulo;
 import com.example.primer_parcial.models.Categoria;
-import com.example.primer_parcial.models.Usuario;
 import com.example.primer_parcial.repository.ArticuloRepository;
 import com.example.primer_parcial.repository.CategoriaRepository;
-import com.example.primer_parcial.repository.UsuarioRepository;
 import com.example.primer_parcial.services.ArticuloServicelmpl;
-import com.example.primer_parcial.services.UsuarioServicelmpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +23,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class ArticuloServicioText {
+public class ArticuloServicioTest {
 
     @InjectMocks
     private ArticuloServicelmpl articuloServicelmpl;

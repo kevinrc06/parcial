@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +22,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class UsuarioServicioText {
+public class UsuarioServicioTest {
 
     @InjectMocks
     private UsuarioServicelmpl usuarioServicelmpl;

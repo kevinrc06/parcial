@@ -1,9 +1,7 @@
 package com.example.primer_parcial.Service;
 
-import com.example.primer_parcial.models.Articulo;
 import com.example.primer_parcial.models.Categoria;
 import com.example.primer_parcial.repository.CategoriaRepository;
-import com.example.primer_parcial.services.ArticuloServicelmpl;
 import com.example.primer_parcial.services.CategoriaServicelmpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +20,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class CategoriaServicioText {
+public class CategoriaServicioTest {
 
     @InjectMocks
     private CategoriaServicelmpl categoriaServicelmpl ;
