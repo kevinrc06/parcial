@@ -41,7 +41,7 @@ public class ArticuloServicioText {
         // given
         Articulo articulo= new Articulo();
         Categoria categoria= new Categoria();
-        categoria.setId(2l);
+        categoria.setId_categoria(2l);
         categoria.setNombre("peppe");
         categoria.setDescripcion("jjj");
         articulo.setId(1l);
@@ -96,7 +96,7 @@ public class ArticuloServicioText {
         // given
         Articulo articulo= new Articulo();
         Categoria categoria= new Categoria();
-        categoria.setId(2l);
+        categoria.setId_categoria(2l);
         categoria.setNombre("peppe");
         categoria.setDescripcion("jjj");
         articulo.setId(1l);
@@ -151,7 +151,7 @@ public class ArticuloServicioText {
         // given
         Articulo articulo= new Articulo();
         Categoria categoria= new Categoria();
-        categoria.setId(2l);
+        categoria.setId_categoria(2l);
         categoria.setNombre("peppe");
         categoria.setDescripcion("jjj");
         articulo.setId(1l);
@@ -211,7 +211,7 @@ public class ArticuloServicioText {
         //Given
         Articulo articulo= new Articulo();
         Categoria categoria= new Categoria();
-        categoria.setId(2l);
+        categoria.setId_categoria(2l);
         categoria.setNombre("peppe");
         categoria.setDescripcion("jjj");
         articulo.setId(1l);

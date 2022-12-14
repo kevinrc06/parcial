@@ -35,7 +35,7 @@ public class CategoriaServicioText {
     void seDebeEncontrarUnCategoriaPorId(){
         // given
         Categoria categoria= new Categoria();
-        categoria.setId(2l);
+        categoria.setId_categoria(2l);
         categoria.setNombre("peppe");
         categoria.setDescripcion("jjj");
 
@@ -86,7 +86,7 @@ public class CategoriaServicioText {
         // given
 
         Categoria categoria= new Categoria();
-        categoria.setId(2l);
+        categoria.setId_categoria(2l);
         categoria.setNombre("peppe");
         categoria.setDescripcion("jjj");
 
@@ -143,7 +143,7 @@ public class CategoriaServicioText {
         //Given
 
         Categoria categoria= new Categoria();
-        categoria.setId(2l);
+        categoria.setId_categoria(2l);
         categoria.setNombre("peppe");
         categoria.setDescripcion("jjj");
 
